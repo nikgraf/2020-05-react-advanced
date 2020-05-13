@@ -1,4 +1,5 @@
 import React from "react";
+import { Resource } from "./wrapPromise";
 
 /**
  * Goal: We want to resource to be part of React's flow (state) so we can change the parameters
@@ -10,7 +11,7 @@ import React from "react";
  * 4. While creating a new resource we could pass in a new parameter e.g. a new endpoint to fetch from (NOT IMPLEMENTED in this example)
  */
 
-const WaitForMe: React.FC<{ resource: any }> = (props) => {
+const WaitForMe: React.FC<{ resource: Resource<string> }> = (props) => {
   const result = props.resource.read();
   return <div>{result}</div>;
 };

@@ -4,7 +4,7 @@ import WaitForMe from "./WaitForMe";
 import wrapPromise from "./wrapPromise";
 
 const createWaitPromise = () =>
-  new Promise((resolve, reject) => {
+  new Promise<string>((resolve, reject) => {
     setTimeout(() => {
       resolve("Yay");
       // reject(new Error("Rejected"));

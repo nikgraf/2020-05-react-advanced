@@ -18,8 +18,12 @@ import Img from "./Img";
  * button for example. That said there is room for improvement on the loading experience.
  */
 
+type GHProfile = { avatar_url: string; login: string };
+
 const Profile: React.FC<{ username: string }> = (props) => {
-  const data = useFetch(`https://api.github.com/users/${props.username}`);
+  const data = useFetch<GHProfile>(
+    `https://api.github.com/users/${props.username}`
+  );
   return (
     <div>
       <Img src={data.avatar_url} alt={`Portrait of ${data.login}`} />

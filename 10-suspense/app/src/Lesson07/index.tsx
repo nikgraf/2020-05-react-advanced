@@ -10,9 +10,10 @@ import Img from "./Img";
  * One downside: it takes longer to load. Ideally we could predirect the image from the
  * url slug. This way we could fetch both in parallel, but in this case it's not possible.
  */
+type GHProfile = { avatar_url: string; login: string };
 
-const Profile = () => {
-  const data = useFetch("https://api.github.com/users/nikgraf");
+const Profile: React.FC = () => {
+  const data = useFetch<GHProfile>("https://api.github.com/users/nikgraf");
   return (
     <div>
       <img src={data.avatar_url} alt={`Portrait of ${data.login}`} />
@@ -25,7 +26,7 @@ const Profile = () => {
   );
 };
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <ErrorBoundary fallback={<div>Oops</div>}>
       <React.Suspense fallback="Loading …">

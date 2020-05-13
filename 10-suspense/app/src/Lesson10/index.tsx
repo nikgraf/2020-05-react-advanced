@@ -23,9 +23,12 @@ import Img from "./Img";
  * our first problem
  * - tail="collapsed" will make sure only one loading state is rendered at the same time
  */
+type GHProfile = { avatar_url: string; login: string };
 
 const Profile: React.FC<{ username: string }> = (props) => {
-  const data = useFetch(`https://api.github.com/users/${props.username}`);
+  const data = useFetch<GHProfile>(
+    `https://api.github.com/users/${props.username}`
+  );
   return (
     <div>
       <Img src={data.avatar_url} alt={`Portrait of ${data.login}`} />
@@ -34,8 +37,12 @@ const Profile: React.FC<{ username: string }> = (props) => {
   );
 };
 
+type GHRepository = { name: string };
+
 const Repositories: React.FC<{ username: string }> = (props) => {
-  const data = useFetch(`https://api.github.com/users/${props.username}/repos`);
+  const data = useFetch<GHRepository[]>(
+    `https://api.github.com/users/${props.username}/repos`
+  );
   return (
     <ul>
       {data.map((repository: any) => (
@@ -47,7 +54,6 @@ const Repositories: React.FC<{ username: string }> = (props) => {
 
 const App = () => {
   const [username, setUsername] = React.useState("nikgraf");
-  // @ts-ignore
   const [startTransition, isPending] = React.useTransition({
     timeoutMs: 3000,
   });

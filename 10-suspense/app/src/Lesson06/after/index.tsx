@@ -2,8 +2,10 @@ import React from "react";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import useFetch from "./useFetch";
 
-const Profile = () => {
-  const data = useFetch("https://api.github.com/users/nikgraf");
+type GHProfile = { avatar_url: string; login: string };
+
+const Profile: React.FC = () => {
+  const data = useFetch<GHProfile>("https://api.github.com/users/nikgraf");
   return (
     <div>
       <img src={data.avatar_url} alt={`Portrait of ${data.login}`} />

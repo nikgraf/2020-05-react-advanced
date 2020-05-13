@@ -4,17 +4,22 @@
 // a contract like this to integrate with React.
 // Real implementations can be significantly more complex.
 // Don't copy-paste this into your project!
-function wrapPromise(promise: any) {
+export type Resource<T> = {
+  read(): T;
+};
+
+function wrapPromise<T>(promise: Promise<T>): Resource<T> {
   let status = "pending";
-  let result: any;
+  let result: T;
+  let error: any;
   let suspender = promise.then(
-    (r: any) => {
+    (r) => {
       status = "success";
       result = r;
     },
-    (e: any) => {
+    (e) => {
       status = "error";
-      result = e;
+      error = e;
     }
   );
   return {
@@ -22,10 +27,9 @@ function wrapPromise(promise: any) {
       if (status === "pending") {
         throw suspender;
       } else if (status === "error") {
-        throw result;
-      } else if (status === "success") {
-        return result;
+        throw error;
       }
+      return result;
     },
   };
 }

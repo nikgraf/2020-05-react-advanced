@@ -1,34 +1,28 @@
 import React from "react";
 import useFetch from "./useFetch";
 
-const Profile = () => {
-  const response = useFetch("https://api.github.com/users/nikgraf");
-  if (response.loading) {
+type GHProfile = { avatar_url: string; login: string };
+
+const Profile: React.FC = () => {
+  const response = useFetch<GHProfile>("https://api.github.com/users/nikgraf");
+  if (response.state === "loading") {
     return <div>Loading …</div>;
   }
-  if (response.error) {
+  if (response.state === "error") {
     return <div>Oops</div>;
   }
   return (
     <div>
       <img
-        // @ts-ignore
         src={response.data.avatar_url}
-        // @ts-ignore
         alt={`Portrait of ${response.data.login}`}
       />
-      <div>
-        Username:{" "}
-        {
-          // @ts-ignore
-          response.data.login
-        }
-      </div>
+      <div>Username: {response.data.login}</div>
     </div>
   );
 };
 
-const App = () => {
+const App: React.FC = () => {
   return <Profile />;
 };
 

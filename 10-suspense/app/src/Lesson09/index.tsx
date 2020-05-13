@@ -10,9 +10,12 @@ import Img from "./Img";
  *
  * Personally I can imagine it being used for component transitions, maybe …
  */
+type GHProfile = { avatar_url: string; login: string };
 
 const Profile: React.FC<{ username: string }> = (props) => {
-  const data = useFetch(`https://api.github.com/users/${props.username}`);
+  const data = useFetch<GHProfile>(
+    `https://api.github.com/users/${props.username}`
+  );
   // @ts-ignore
   const deferredData = React.useDeferredValue(data, { timeoutMs: 2000 });
   console.log(data.login, deferredData.login);
