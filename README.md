@@ -18,3 +18,7 @@ Process for every lesson:
 ## Code
 
 Most of it is written in TypeScript (not particularily well typed). Feel free to use plain JavaScript if you prefer that.
+
+## Feedback Form
+
+https://docs.google.com/forms/d/e/1FAIpQLSduti27Gold0T3WDtSe04Hi3V-yaBG0ChqAbS-t3-qoe4qsbA/viewform
