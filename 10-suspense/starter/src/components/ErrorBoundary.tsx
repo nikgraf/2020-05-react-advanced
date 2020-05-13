@@ -11,6 +11,7 @@ class ErrorBoundary extends React.Component<Props> {
 
   componentDidCatch(error: any) {
     this.setState({ error });
+    // sendTheErrorToErrorTrack
   }
 
   render() {
